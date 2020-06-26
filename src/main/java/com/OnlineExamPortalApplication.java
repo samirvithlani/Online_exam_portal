@@ -10,6 +10,7 @@ public class OnlineExamPortalApplication {
 		SpringApplication.run(OnlineExamPortalApplication.class, args);
 		System.out.println("hi");
 		System.out.println("hi");
+		System.out.println("hello hem....");
 		
 	}
 
