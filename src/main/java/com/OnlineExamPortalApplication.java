@@ -8,6 +8,7 @@ public class OnlineExamPortalApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineExamPortalApplication.class, args);
+		System.out.println("hi");
 	}
 
 }
