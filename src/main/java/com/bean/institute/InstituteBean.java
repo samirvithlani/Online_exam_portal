@@ -1,7 +1,7 @@
 package com.bean.institute;
 
-public class InstituteBean {
-	
+public class InstituteBean 
+{	
 	private String iId;
 	private String iName;
 	private long iContact;
