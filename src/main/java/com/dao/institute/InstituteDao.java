@@ -19,7 +19,8 @@ public class InstituteDao
 	
 	public int addInstitute(InstituteBean instituteBean) 
 	{	
-		return jdbcTemplate.update("insert into institute(?,?,?,?,?,?)",instituteBean.getiId(),
+		return jdbcTemplate.update("insert into institute(iid,iname,icontact,imail,icity,istate)"
+				+ " values(?,?,?,?,?,?)",instituteBean.getiId(),
 				instituteBean.getiName(),instituteBean.getiContact(),instituteBean.getiMail(),
 				instituteBean.getiCity(),instituteBean.getiState());
 	}
@@ -40,8 +41,20 @@ public class InstituteDao
 		}
 	}
 	
-	public List<InstituteBean> instituteList() {
-
+	public List<InstituteBean> instituteList() 
+	{
 		return jdbcTemplate.query("select * from institute", new InstituteMapper());
+	}
+	
+	public int deleteInstitute(String id) 
+	{
+		return jdbcTemplate.update("delete from institute where iid =?", id);
+	}
+	
+	public int updateInstitute(InstituteBean instituteBean, String id)
+	{
+		return jdbcTemplate.update("update institute set iname=?, icontact=?, imail=?, icity=?, istate=? where iid =?",
+				instituteBean.getiName(),instituteBean.getiContact(),instituteBean.getiMail(),
+				instituteBean.getiCity(),instituteBean.getiState(),id);
 	}
 }
