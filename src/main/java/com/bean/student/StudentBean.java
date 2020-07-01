@@ -11,7 +11,6 @@ public class StudentBean
 	private String uPassword;
 	private String iId;
 	
-	
 	public String getsId() {
 		return sId;
 	}
