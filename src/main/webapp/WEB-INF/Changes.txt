@@ -1,0 +1,3 @@
+There is a change in the database
+We have contact column in institute, administrator, faculty & student Table.
+Change its data type to bigint instead of integer.
