@@ -45,7 +45,7 @@ public class InstituteDao
 	{
 		return jdbcTemplate.query("select * from institute", new InstituteMapper());
 	}
-	
+
 	public int deleteInstitute(String id) 
 	{
 		return jdbcTemplate.update("delete from institute where iid =?", id);

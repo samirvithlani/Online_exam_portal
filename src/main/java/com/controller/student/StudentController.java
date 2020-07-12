@@ -17,15 +17,16 @@ import com.dao.student.StudentDao;
 
 @RestController
 @RequestMapping("/student")
-public class StudentController {
+public class StudentController 
+{
 	@Autowired
 	StudentDao studentDao;
+	
 	@PostMapping(value="/addstudent")
 	public ResponseEntity addStudent(StudentBean studentBean)
 	{
-		int status=studentDao.addStudent(studentBean);
-		if(status>0)
-		{
+		int status = studentDao.addStudent(studentBean);
+		if(status > 0){ 
 			return new ResponseEntity(studentBean,HttpStatus.CREATED);
 		}
 		return new ResponseEntity(HttpStatus.SERVICE_UNAVAILABLE);
@@ -36,25 +37,25 @@ public class StudentController {
 	{
 		return studentDao.studentList();
 	}
+	
 	@DeleteMapping("/deletestudent/{id}")
 	public String deleteStudent(@PathVariable String id)
 	{
-		int status=studentDao.deleteStuddent(id);
-		if(status>0)
+		int status = studentDao.deleteStudent(id);
+		if(status>0) {
 			return "Student Deleted !!";
+		}
 		return "Student not Deleted";
 	}
 	
 	@PostMapping(value="/updatestudent/{id}")
 	public StudentBean updateStudent(StudentBean studentBean,@PathVariable String id)
 	{
-		int status= studentDao.updateStudent(studentBean, id);
-		if(status>0)
-		{
+		int status = studentDao.updateStudent(studentBean, id);
+		if(status>0){
 			return studentBean;
 		}
 		return null;
 	}
 	
-
 }

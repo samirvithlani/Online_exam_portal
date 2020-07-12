@@ -13,16 +13,22 @@ import org.springframework.stereotype.Repository;
 import com.bean.student.StudentBean;
 
 @Repository
-public class StudentDao {
+public class StudentDao 
+{
 	@Autowired 
 	JdbcTemplate jdbcTemplate;
+	
 	public int addStudent(StudentBean studentBean)
 	{
-		return jdbcTemplate.update("insert into student(sid,fname,lname,smail,scontact,uname,upassword,iid)"+" values(?,?,?,?,?,?,?,?)",studentBean.getsId(),studentBean.getfName()
-				,studentBean.getlName(),studentBean.getsMail(),studentBean.getsContact(),studentBean.getuName(),studentBean.getuPassword(),studentBean.getiId());
+		return jdbcTemplate.update("insert into student(sid,fname,lname,smail,scontact,uname,upassword,iid)"+" "
+				+ "values(?,?,?,?,?,?,?,?)",studentBean.getsId(),studentBean.getfName(),studentBean.getlName(),
+				studentBean.getsMail(),studentBean.getsContact(),studentBean.getuName(),studentBean.getuPassword(),
+				studentBean.getiId());
 	}
+	
 	private final static class StudentMapper implements RowMapper<StudentBean>
 	{
+		@Override
 		public StudentBean mapRow(ResultSet rs, int rowNum) throws SQLException 
 		{
 			StudentBean studentBean = new StudentBean();
@@ -36,22 +42,22 @@ public class StudentDao {
 			studentBean.setiId(rs.getString("iid"));
 			return studentBean;
 		}
-		
 	}
+	
 	public List<StudentBean> studentList()
 	{
 		return jdbcTemplate.query("select * from student",new StudentMapper());
 	}
 	
-	public int deleteStuddent(String id)
+	public int deleteStudent(String id)
 	{
 		return jdbcTemplate.update("delete from student where sid=?",id);
 	}
 	
 	public int updateStudent(StudentBean studentBean,String id)
 	{
-		return jdbcTemplate.update("update student set fname=?, lname=?, smail=?, scontact=?, uname=?, upassword=?, iid=? where sid=?",
-				studentBean.getfName(),studentBean.getlName(),studentBean.getsMail(),studentBean.getsContact(),studentBean.getuName(),studentBean.getuPassword(),
-				studentBean.getiId(),id);
+		return jdbcTemplate.update("update student set fname=?, lname=?, smail=?, scontact=?, uname=?, upassword=?, iid=? "
+				+ "where sid=?",studentBean.getfName(),studentBean.getlName(),studentBean.getsMail(),studentBean.getsContact(),
+				studentBean.getuName(),studentBean.getuPassword(),studentBean.getiId(),id);
 	}
 }

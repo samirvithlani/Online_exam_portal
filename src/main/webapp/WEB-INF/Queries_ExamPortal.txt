@@ -1,0 +1,152 @@
+create table institute(
+	iid varchar(5) primary key,
+	iname varchar(50) NOT NULL,
+	icontact int NOT NULL unique,
+	imail varchar(30) NOT NULL unique,
+	icity char(15),
+	istate char(15),
+	iwebsite text,
+	check( substr(iid,1,1)='I' )
+)
+
+================================================================================
+
+create table administrator(
+	aid varchar(5) primary key,
+	fname varchar(15) NOT NULL,
+	lname varchar(15) NOT NULL,
+	amail varchar(30) NOT NULL unique,
+	acontact int unique,
+	uname varchar(15) NOT NULL unique,
+	upassword varchar(10) NOT NULL unique,
+	iid varchar(5) NOT NULL,
+	check( substr(aid,1,1)='A' ),
+	check( length(upassword) > 7 ),
+	foreign key (iid) REFERENCES institute (iid)
+)
+
+=====================================================================================
+
+create table counselor(
+	cid varchar(5) primary key,
+	fname varchar(15) NOT NULL,
+	lname varchar(15) NOT NULL,
+	cmail varchar(30) NOT NULL unique,
+	ccontact int unique,
+	uname varchar(15) NOT NULL unique,
+	upassword varchar(15) NOT NULL unique,
+	cbio text,
+	linkedin varchar(100),
+	iid varchar(5) NOT NULL,
+	check( substr(cid,1,1)='C' ),
+	check( length(upassword) > 7 ),
+	foreign key (iid) REFERENCES institute (iid)
+)
+
+=================================================================================
+
+create table faculty(
+	fid varchar(5) primary key,
+	fname varchar(15) NOT NULL,
+	lname varchar(15) NOT NULL,
+	fmail varchar(30) NOT NULL unique,
+	fcontact int unique,
+	uname varchar(15) NOT NULL unique,
+	upassword varchar(10) NOT NULL unique,
+	fqualification varchar(30) NOT NULL,
+	fdegree varchar(100) NOT NULL,
+	fbio text,
+	ytlink varchar(100),	
+	iid varchar(5) NOT NULL,
+	check( substr(fid,1,1)='F' ),
+	check( length(upassword) > 7 ),
+	foreign key (iid) REFERENCES institute (iid)
+)
+
+==================================================================================
+
+create table student(
+	sid varchar(5) primary key,
+	fname varchar(15) NOT NULL,
+	lname varchar(15) NOT NULL,
+	smail varchar(30) NOT NULL unique,
+	scontact int unique,
+	uname varchar(15) NOT NULL unique,
+	upassword varchar(10) NOT NULL unique,
+	squalification varchar(30),
+	iid varchar(5),
+	check( substr(sid,1,1)='S' ),
+	check( length(upassword) > 7 ),
+	foreign key (iid) REFERENCES institute (iid)
+)
+
+Students without an institute can also register
+-----------------------------------------------------------------
+insert into student(sid,fname,lname,smail,uname,upassword)
+values('S12','Hem','Patel','hem@gmail.com','hem_1242','hem12345');
+
+
+=================================================================================
+
+create table exams(
+	eid varchar(5) primary key,
+	esubject varchar(25) NOT NULL,
+	etitle varchar(30) NOT NULL,
+	totalmarks int NOT NULL,
+	dateofcreation timestamp NOT NULL,
+	dateofconduct timestamp NOT NULL,
+	duration varchar(15) NOT NULL,
+	estatus varchar(8) NOT NULL,
+	fid varchar(5) NOT NULL,
+	check( substr(eid,1,1)='E' ),
+	CONSTRAINT check_estatus CHECK (estatus in ('Enable' , 'Disable')),
+	foreign key (fid) REFERENCES faculty (fid)
+)
+
+=================================================================================
+
+create table exam_qa(
+	eid varchar(5) primary key,
+	question text NOT NULL,
+	option1 text,
+	option2 text,
+	option3 text,
+	option4 text,
+	answer text NOT NULL,
+	marks int NOT NULL,
+	check( substr(eid,1,1)='E' ),
+	foreign key (eid) REFERENCES exams (eid)
+)
+
+=====================================================================================
+
+create table result(
+	sid varchar(5) NOT NULL,
+	eid varchar(5) NOT NULL,
+	obtainedmarks int NOT NULL,
+	foreign key (eid) REFERENCES exams (eid),
+	foreign key (sid) REFERENCES student (sid),
+	PRIMARY KEY(sid, eid)
+)
+
+=============================================
+
+create table doubts(
+	questionfrom varchar(5) NOT NULL,
+	question text NOT NULL UNIQUE,
+	answer text,
+	answerby varchar(5),
+	foreign key (questionfrom) REFERENCES student (sid),
+	foreign key (answerby) REFERENCES teacher (tid)
+)
+
+=============================================
+
+create table books(
+	bid varchar(5) PRIMARY KEY,
+	bname varchar(75) NOT NULL UNIQUE,
+	author varchar(50) NOT NULL,
+	publisher varchar(75),
+	category varchar(50),
+	pdf text NOT NULL
+)
