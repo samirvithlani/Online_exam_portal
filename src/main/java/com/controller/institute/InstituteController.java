@@ -54,8 +54,8 @@ public class InstituteController
 		return "Institute not Deleted !!";
 	}
 	
-	@PostMapping(value = "/updateuser/{id}")
-	public InstituteBean updateUser(InstituteBean instituteBean, @PathVariable String id) 
+	@PostMapping(value = "/updateinstitute/{id}")
+	public InstituteBean updateInstitute(InstituteBean instituteBean, @PathVariable String id) 
 	{
 		int status = instituteDao.updateInstitute(instituteBean, id);
 		if (status > 0) {

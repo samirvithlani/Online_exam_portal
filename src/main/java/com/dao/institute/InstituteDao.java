@@ -19,10 +19,10 @@ public class InstituteDao
 	
 	public int addInstitute(InstituteBean instituteBean) 
 	{	
-		return jdbcTemplate.update("insert into institute(iid,iname,icontact,imail,icity,istate)"
-				+ " values(?,?,?,?,?,?)",instituteBean.getiId(),
+		return jdbcTemplate.update("insert into institute(iid,iname,icontact,imail,icity,istate,iwebsite)"
+				+ " values(?,?,?,?,?,?,?)",instituteBean.getiId(),
 				instituteBean.getiName(),instituteBean.getiContact(),instituteBean.getiMail(),
-				instituteBean.getiCity(),instituteBean.getiState());
+				instituteBean.getiCity(),instituteBean.getiState(),instituteBean.getiWebSite());
 	}
 	
 	private final static class InstituteMapper implements RowMapper<InstituteBean> 
@@ -37,6 +37,7 @@ public class InstituteDao
 			instituteBean.setiMail(rs.getString("imail"));
 			instituteBean.setiCity(rs.getString("icity"));
 			instituteBean.setiState(rs.getString("istate"));
+			instituteBean.setiWebSite(rs.getString("iwebsite"));
 			return instituteBean;
 		}
 	}
@@ -53,8 +54,8 @@ public class InstituteDao
 	
 	public int updateInstitute(InstituteBean instituteBean, String id)
 	{
-		return jdbcTemplate.update("update institute set iname=?, icontact=?, imail=?, icity=?, istate=? where iid =?",
-				instituteBean.getiName(),instituteBean.getiContact(),instituteBean.getiMail(),
-				instituteBean.getiCity(),instituteBean.getiState(),id);
+		return jdbcTemplate.update("update institute set iname=?, icontact=?, imail=?, icity=?, istate=?, iwebsite=?"
+				+ " where iid =?",instituteBean.getiName(),instituteBean.getiContact(),instituteBean.getiMail(),
+				instituteBean.getiCity(),instituteBean.getiState(),instituteBean.getiWebSite(),id);
 	}
 }

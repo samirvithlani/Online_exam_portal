@@ -26,7 +26,7 @@ public class StudentDao
 				studentBean.getiId());
 	}
 	
-	private final static class StudentMapper implements RowMapper<StudentBean>
+	public final static class StudentMapper implements RowMapper<StudentBean>
 	{
 		@Override
 		public StudentBean mapRow(ResultSet rs, int rowNum) throws SQLException 

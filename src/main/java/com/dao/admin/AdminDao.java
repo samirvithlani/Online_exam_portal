@@ -24,7 +24,7 @@ public class AdminDao
 				adminBean.getaContact(),adminBean.getuName(),adminBean.getuPassword(),adminBean.getiId());
 	}
 	
-	private final static class AdminMapper implements RowMapper<AdminBean> 
+	public final static class AdminMapper implements RowMapper<AdminBean> 
 	{
 		@Override
 		public AdminBean mapRow(ResultSet rs, int rowNum) throws SQLException 
@@ -54,8 +54,8 @@ public class AdminDao
 	
 	public int updateAdmin(AdminBean adminBean, String id)
 	{
-		return jdbcTemplate.update("update institute set fname=?, lname=?, amail=?, acontact=?, uname=?, upassword=?, iid=?"
-				+ " where iid =?",adminBean.getfName(),adminBean.getlName(),adminBean.getaMail(),adminBean.getaContact(),
+		return jdbcTemplate.update("update administrator set fname=?, lname=?, amail=?, acontact=?, uname=?, upassword=?, iid=?"
+				+ " where aid =?",adminBean.getfName(),adminBean.getlName(),adminBean.getaMail(),adminBean.getaContact(),
 				adminBean.getuName(),adminBean.getuPassword(),adminBean.getiId(),id);
 	}
 }

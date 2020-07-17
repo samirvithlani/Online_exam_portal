@@ -8,8 +8,15 @@ public class InstituteBean
 	private String iMail;
 	private String iCity;
 	private String iState;
+	private String iWebSite;
 	
 	
+	public String getiWebSite() {
+		return iWebSite;
+	}
+	public void setiWebSite(String iWebSite) {
+		this.iWebSite = iWebSite;
+	}
 	public String getiId() {
 		return iId;
 	}
