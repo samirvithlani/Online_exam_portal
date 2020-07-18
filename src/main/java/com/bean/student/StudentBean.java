@@ -9,6 +9,13 @@ public class StudentBean
 	private long sContact;
 	private String uName;
 	private String uPassword;
+	private String sQualification;
+	public String getsQualification() {
+		return sQualification;
+	}
+	public void setsQualification(String sQualification) {
+		this.sQualification = sQualification;
+	}
 	private String iId;
 	
 	public String getsId() {

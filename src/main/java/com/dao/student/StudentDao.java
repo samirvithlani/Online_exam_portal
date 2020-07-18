@@ -20,9 +20,9 @@ public class StudentDao
 	
 	public int addStudent(StudentBean studentBean)
 	{
-		return jdbcTemplate.update("insert into student(sid,fname,lname,smail,scontact,uname,upassword,iid)"+" "
-				+ "values(?,?,?,?,?,?,?,?)",studentBean.getsId(),studentBean.getfName(),studentBean.getlName(),
-				studentBean.getsMail(),studentBean.getsContact(),studentBean.getuName(),studentBean.getuPassword(),
+		return jdbcTemplate.update("insert into student(sid,fname,lname,smail,scontact,uname,upassword,squalification,iid)"+" "
+				+ "values(?,?,?,?,?,?,?,?,?)",studentBean.getsId(),studentBean.getfName(),studentBean.getlName(),
+				studentBean.getsMail(),studentBean.getsContact(),studentBean.getuName(),studentBean.getuPassword(),studentBean.getsQualification(),
 				studentBean.getiId());
 	}
 	
@@ -39,6 +39,7 @@ public class StudentDao
 			studentBean.setsMail(rs.getString("smail"));
 			studentBean.setuName(rs.getString("uname"));
 			studentBean.setuPassword(rs.getString("upassword"));
+			studentBean.setsQualification(rs.getString("squalification"));
 			studentBean.setiId(rs.getString("iid"));
 			return studentBean;
 		}
@@ -56,8 +57,8 @@ public class StudentDao
 	
 	public int updateStudent(StudentBean studentBean,String id)
 	{
-		return jdbcTemplate.update("update student set fname=?, lname=?, smail=?, scontact=?, uname=?, upassword=?, iid=? "
+		return jdbcTemplate.update("update student set fname=?, lname=?, smail=?, scontact=?, uname=?, upassword=?,squalification=?, iid=? "
 				+ "where sid=?",studentBean.getfName(),studentBean.getlName(),studentBean.getsMail(),studentBean.getsContact(),
-				studentBean.getuName(),studentBean.getuPassword(),studentBean.getiId(),id);
+				studentBean.getuName(),studentBean.getuPassword(),studentBean.getsQualification(),studentBean.getiId(),id);
 	}
 }
